@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Desierto - Helado, Montaña y Animales</title>
+
+  <!-- Librería A-Frame -->
+  <script src="https://aframe.io/releases/1.8.0/aframe.min.js"></script>
+</head>
+
+<body>
+
+<a-scene>
+
+  <!-- ========================= -->
+  <!-- CIELO DE ATARDECER -->
+  <!-- ========================= -->
+
+  <a-sky color="#FF7F3E"></a-sky>
+
+  <!-- Sol en el fondo -->
+  <a-sphere
+    position="0 7 -18"
+    radius="2.5"
+    color="#FFDC33"
+    material="shader: flat">
+  </a-sphere>
+
+  <!-- Montañas lejanas -->
+  <a-cone position="-10 2.5 -18" radius-bottom="10" height="7" color="#D85C27"></a-cone>
+  <a-cone position="10 3 -18" radius-bottom="12" height="8" color="#C44E1C"></a-cone>
+
+
+  <!-- ========================= -->
+  <!-- PISO DE ARENA DEL DESIERTO -->
+  <!-- ========================= -->
+
+  <a-plane
+    position="0 0 0"
+    rotation="-90 0 0"
+    width="40"
+    height="40"
+    color="#F5E6CA">
+  </a-plane>
+
+
+  <!-- ========================= -->
+  <!-- ÁRBOLES OTOÑALES -->
+  <!-- ========================= -->
+
+  <a-entity position="-6 0 -7">
+    <a-cylinder position="0 2 0" radius="0.35" height="4" color="#3B2219"></a-cylinder>
+    <a-sphere position="0 4.2 0" radius="1.8" color="#E67E22"></a-sphere>
+    <a-sphere position="-0.8 3.8 0.5" radius="1.2" color="#D35400"></a-sphere>
+    <a-sphere position="0.8 4.5 -0.3" radius="1.3" color="#F39C12"></a-sphere>
+  </a-entity>
+
+
+  <!-- ========================= -->
+  <!-- MONTAÑA PRINCIPAL -->
+  <!-- ========================= -->
+
+  <a-entity position="2.2 0 -5">
+    <a-cone
+      position="0 2.5 0"
+      radius-bottom="1.9"
+      radius-top="0.2"
+      height="5"
+      color="#5C4A3E">
+    </a-cone>
+    <a-cone
+      position="0 4.2 0"
+      radius-bottom="0.8"
+      radius-top="0.1"
+      height="1.8"
+      color="#8C7A6B">
+    </a-cone>
+  </a-entity>
+
+
+  <!-- ========================= -->
+  <!-- HELADO (UBICADO AL LADO DE LA MONTAÑA) -->
+  <!-- ========================= -->
+
+  <!-- CONO -->
+  <a-cone
+    position="4.3 1.2 -5"
+    radius-bottom="0.9"
+    radius-top="0.15"
+    height="2"
+    color="#C97A3D">
+  </a-cone>
+
+  <!-- BOLA 1 -->
+  <a-sphere
+    position="4.3 2.2 -5"
+    radius="0.75"
+    color="#F5C16C">
+  </a-sphere>
+
+  <!-- BOLA 2 -->
+  <a-sphere
+    position="4.3 3.25 -5"
+    radius="0.75"
+    color="#E89AB8">
+  </a-sphere>
+
+  <!-- BOLA 3 (CON PEPITAS / CHISPAS ANIMADAS) -->
+  <a-sphere
+    position="4.3 4.3 -5"
+    radius="0.75"
+    color="#FFF2CC">
+    
+    <a-cylinder position="0 0.7 0.2" rotation="45 15 0" radius="0.02" height="0.15" color="#FF0000"
+      animation="property: scale; from: 0 0 0; to: 1 1 1; dur: 1000; loop: true; dir: alternate;">
+    </a-cylinder>
+
+    <a-cylinder position="0.3 0.6 0.3" rotation="20 45 30" radius="0.02" height="0.15" color="#00FF00"
+      animation="property: scale; from: 0 0 0; to: 1 1 1; dur: 1200; loop: true; dir: alternate; delay: 200">
+    </a-cylinder>
+
+    <a-cylinder position="-0.3 0.65 0.25" rotation="-30 10 -40" radius="0.02" height="0.15" color="#0000FF"
+      animation="property: scale; from: 0 0 0; to: 1 1 1; dur: 900; loop: true; dir: alternate; delay: 400">
+    </a-cylinder>
+
+    <a-cylinder position="0.2 0.7 -0.2" rotation="70 0 45" radius="0.02" height="0.15" color="#FF00FF"
+      animation="property: scale; from: 0 0 0; to: 1 1 1; dur: 1100; loop: true; dir: alternate; delay: 100">
+    </a-cylinder>
+
+    <a-cylinder position="-0.25 0.5 -0.4" rotation="10 80 20" radius="0.02" height="0.15" color="#FFA500"
+      animation="property: scale; from: 0 0 0; to: 1 1 1; dur: 1050; loop: true; dir: alternate; delay: 300">
+    </a-cylinder>
+  </a-sphere>
+
+
+  <!-- ========================= -->
+  <!-- CUBO ANIMADO (COLISIÓN Y REBOTE) -->
+  <!-- ========================= -->
+
+  <a-box
+    position="-4 3 -5"
+    color="#FF6347"
+    animation="
+      property: position;
+      to: 1.1 3 -5;
+      dur: 2000;
+      easing: easeInQuad;
+      loop: true;
+      dir: alternate;
+    ">
+  </a-box>
+
+
+  <!-- ========================= -->
+  <!-- ANIMALES DEL DESIERTO -->
+  <!-- ========================= -->
+
+  <!-- CAMELLO -->
+  <a-entity position="-2.5 0 -8" rotation="0 35 0">
+    <!-- Cuerpo -->
+    <a-box position="0 1.2 0" width="1.6" height="0.9" depth="0.8" color="#C2B280"></a-box>
+    <!-- Joroba -->
+    <a-sphere position="0 1.8 0" radius="0.5" color="#B3A270"></a-sphere>
+    <!-- Cuello y Cabeza -->
+    <a-cylinder position="0.7 1.9 0" rotation="0 0 -25" radius="0.2" height="1" color="#C2B280"></a-cylinder>
+    <a-box position="1.1 2.3 0" width="0.5" height="0.3" depth="0.3" color="#C2B280"></a-box>
+    <!-- Patas -->
+    <a-cylinder position="-0.5 0.5 0.25" radius="0.08" height="1" color="#A69563"></a-cylinder>
+    <a-cylinder position="-0.5 0.5 -0.25" radius="0.08" height="1" color="#A69563"></a-cylinder>
+    <a-cylinder position="0.5 0.5 0.25" radius="0.08" height="1" color="#A69563"></a-cylinder>
+    <a-cylinder position="0.5 0.5 -0.25" radius="0.08" height="1" color="#A69563"></a-cylinder>
+  </a-entity>
+
+  <!-- SERPIENTE DEL DESIERTO -->
+  <a-entity position="0.5 0.1 -7" rotation="0 -40 0">
+    <a-sphere position="0 0 0" radius="0.15" color="#8B5A2B"></a-sphere>
+    <a-sphere position="0.2 0 0.1" radius="0.13" color="#A0522D"></a-sphere>
+    <a-sphere position="0.4 0 0" radius="0.11" color="#8B5A2B"></a-sphere>
+    <a-sphere position="0.58 0 -0.1" radius="0.09" color="#A0522D"></a-sphere>
+    <!-- Cabeza -->
+    <a-sphere position="-0.18 0.04 0" radius="0.17" color="#6B4226">
+      <a-sphere position="-0.1 0.06 0.08" radius="0.03" color="#000000"></a-sphere>
+      <a-sphere position="-0.1 0.06 -0.08" radius="0.03" color="#000000"></a-sphere>
+    </a-sphere>
+  </a-entity>
+
+  <!-- BUITRE VOLANDO -->
+  <a-entity position="-3 7.5 -11" rotation="10 30 0">
+    <a-box position="0 0 0" width="0.4" height="0.15" depth="0.5" color="#222222"></a-box>
+    <a-box position="-0.7 0 0" width="1" height="0.04" depth="0.3" color="#111111"></a-box>
+    <a-box position="0.7 0 0" width="1" height="0.04" depth="0.3" color="#111111"></a-box>
+    <a-sphere position="0 0 0.3" radius="0.12" color="#772222"></a-sphere>
+  </a-entity>
+
+
+  <!-- ========================= -->
+  <!-- ILUMINACIÓN -->
+  <!-- ========================= -->
+
+  <a-light
+    type="ambient"
+    color="#FFD1A4"
+    intensity="1.2">
+  </a-light>
+
+  <a-light
+    type="directional"
+    position="-5 8 2"
+    color="#FFA500"
+    intensity="1.5">
+  </a-light>
+
+
+  <!-- ========================= -->
+  <!-- CÁMARA -->
+  <!-- ========================= -->
+
+  <a-camera
+    position="0 3 -15"
+    rotation="0 0 0">
+  </a-camera>
+
+</a-scene>
+
+<a-scene>
+  <a-assets>
+    <a-asset-item id="tree" src="3d/Skatefab - Ejercicio en clase/Objetos/objeto 2- Casa/GLB/clock_shaped_as_a_highlanders_cottage.glb"></a-asset-item>
+  </a-assets>
+
+  <a-entity gltf-model="Casa/GLB/clock_shaped_as_a_highlanders_cottage.glb"></a-entity>
+</a-scene>
+
+
+</body>
+</html>
