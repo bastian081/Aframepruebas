@@ -4,6 +4,20 @@
 <title>otro</title>
 <link href="file:///Macintosh HD/Users/estudiantes/hoja.css" rel="stylesheet" type="text/css">
 	    <script src="https://aframe.io/releases/1.8.0/aframe.min.js"></script>
+<script 
+	AFRAME.registerComponent('enlace-click', {
+  schema: {
+    url: { type: 'string' }
+  },
+  init: function () {
+    this.el.addEventListener('click', () => {
+      window.location.href = this.data.url;
+    });
+  }
+});
+	
+	></script>
+	
 </head>
 
 <body>
