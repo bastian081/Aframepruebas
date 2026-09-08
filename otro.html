@@ -22,9 +22,17 @@
 
 <body>
 <a-scene>
+
+	
   <a-assets>
     <img id="boton2" src="img/cielo.jpg">
   </a-assets>
+
+	<a-gltf-model
+    src="modelo.glb"
+    position="0 1.5 -3"
+    enlace-click="url: otra-escena.html">
+  </a-gltf-model>
   <a-link position="0 2 -4" href="index.html" title="A mi index" image="#boton2"></a-link>
 
 	<a-camera>
