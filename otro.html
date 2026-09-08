@@ -1,47 +1,59 @@
-<html>
+<!DOCTYPE html>
+<html lang="es">
 <head>
-<meta charset="UTF-8">
-<title>otro</title>
-<link href="file:///Macintosh HD/Users/estudiantes/hoja.css" rel="stylesheet" type="text/css">
-	    <script src="https://aframe.io/releases/1.8.0/aframe.min.js"></script>
-<script 
-	AFRAME.registerComponent('enlace-click', {
-  schema: {
-    url: { type: 'string' }
-  },
-  init: function () {
-    this.el.addEventListener('click', () => {
-      window.location.href = this.data.url;
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mi Sitio VR - Modelo 3D Interactivo</title>
+
+  <!-- 1. Librería A-Frame -->
+  <script src="https://aframe.io/releases/1.6.0/aframe.min.js"></script>
+
+  <!-- 2. Componente personalizado en JS para hacer clic en el modelo -->
+  <script>
+    AFRAME.registerComponent('enlace-click', {
+      schema: {
+        url: { type: 'string', default: '' }
+      },
+      init: function () {
+        var data = this.data;
+        var el = this.el;
+
+        // Escucha el evento de clic en la geometría 3D
+        el.addEventListener('click', function () {
+          if (data.url) {
+            window.location.href = data.url;
+          }
+        });
+      }
     });
-  }
-});
-	
-	></script>
-	
+  </script>
 </head>
-
 <body>
-<a-scene>
 
-	
-  <a-assets>
-    <img id="boton2" src="img/cielo.jpg">
-  </a-assets>
+  <a-scene>
+    <!-- 3. Carga previa de recursos (Assets) -->
+    <a-assets>
+      <!-- Cambia 'mi_objeto.glb' por la ruta de tu archivo GLB -->
+      <a-asset-item id="modelo3d" src="3d/h.glb"></a-asset-item>
+    </a-assets>
 
-	<a-gltf-model
-    src="3d/h.glb"
-    position="1 1.5 -3"
-		scale = " 4 4 4 "
-    enlace-click="url:index.html">
-  </a-gltf-model>
-  
+    <!-- 4. Fondo de la escena -->
+    <a-sky color="#ECECF4"></a-sky>
 
-	<a-camera>
-    <a-cursor color="blue"></a-cursor>
-  </a-camera>
-	
-  <a-sky color="red"></a-sky>
-<a-plane position="0 0 -4" rotation="-90 0 0" width="4" height="4" color="green"></a-plane>
-</a-scene>
+    <!-- 5. Cámara con cursor para registrar el clic sobre objetos 3D -->
+    <a-camera>
+      <a-cursor color="#FF5722"></a-cursor>
+    </a-camera>
+
+    <!-- 6. Modelo GLB configurado como enlace -->
+    <a-gltf-model
+      src="#modelo3d"
+      position="0 1.5 -3"
+      scale="1 1 1"
+      enlace-click="url: index.html">
+    </a-gltf-model>
+
+  </a-scene>
+
 </body>
 </html>
