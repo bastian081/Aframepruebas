@@ -1,29 +1,75 @@
 <!doctype html>
-<html>
+<html lang="es">
+
 <head>
-<meta charset="UTF-8">
-<title>proyecto</title>
-<link href="style.css" rel="stylesheet" type="text/css">
-	    <script src="https://aframe.io/releases/1.8.0/aframe.min.js"></script>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Proyecto</title>
+
+    <link href="style.css" rel="stylesheet" type="text/css">
+
+    <!-- A-Frame -->
+    <script src="https://aframe.io/releases/1.8.0/aframe.min.js"></script>
+
 </head>
 
 <body>
-	<a-scene>
-  <a-assets>
-    <img id="bosque" src="img/bosque.png">
-	    <img id="bosque" src="img/bosque.png">
-  </a-assets>
 
-		
+<a-scene>
 
-  <a-link href="otro.html" position="0 2 -8" title="My Homepage" image="#boton"></a-link>
+    <!-- ========================= -->
+    <!-- RECURSOS -->
+    <!-- ========================= -->
 
-		
-<a-camera>
-    <a-cursor color="red"></a-cursor>
-  </a-camera>
- <a-sky src="#bosque"></a-sky>
+    <a-assets>
+
+        <!-- Tu imagen 360 -->
+        <img 
+            id="bosque" 
+            src="img/bosque.png"
+        >
+
+    </a-assets>
+
+
+    <!-- ========================= -->
+    <!-- BOSQUE 360 -->
+    <!-- ========================= -->
+
+    <a-sky 
+        src="#bosque">
+    </a-sky>
+
+
+    <!-- ========================= -->
+    <!-- PORTAL -->
+    <!-- ========================= -->
+
+    <a-link 
+        href="otro.html"
+        position="0 2 -8"
+        title="Entrar al otro mundo">
+    </a-link>
+
+
+    <!-- ========================= -->
+    <!-- CÁMARA -->
+    <!-- ========================= -->
+
+    <a-camera>
+
+        <a-cursor 
+            color="red">
+        </a-cursor>
+
+    </a-camera>
+
+
 </a-scene>
+
 </body>
-</html>
+
 </html>
