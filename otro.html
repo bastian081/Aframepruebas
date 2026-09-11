@@ -1,59 +1,98 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Bosque</title>
-
-  <!-- 1. Librería A-Frame -->
-  <script src="https://aframe.io/releases/1.6.0/aframe.min.js"></script>
-
-  <!-- 2. Componente personalizado en JS para hacer clic en el modelo -->
-  <script>
-    AFRAME.registerComponent('enlace-click', {
-      schema: {
-        url: { type: 'string', default: '' }
-      },
-      init: function () {
-        var data = this.data;
-        var el = this.el;
-
-        // Escucha el evento de clic en la geometría 3D
-        el.addEventListener('click', function () {
-          if (data.url) {
-            window.location.href = data.url;
-          }
-        });
-      }
-    });
-  </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bosque Low Poly - A-Frame</title>
+    <!-- Importamos A-Frame -->
+    <script src="https://aframe.io/releases/1.4.2/aframe.min.js"></script>
 </head>
 <body>
+    <a-scene>
+        <!-- CIELO -->
+        <!-- Fondo gris oscuro como en tu imagen -->
+        <a-sky color="#5b5b60"></a-sky>
 
-  <a-scene>
-    <!-- 3. Carga previa de recursos (Assets) -->
-    <a-assets>
-      <!-- Cambia 'mi_objeto.glb' por la ruta de tu archivo GLB -->
-      <a-asset-item id="modelo3d" src="3d/h.glb"></a-asset-item>
-    </a-assets>
+        <!-- ILUMINACIÓN -->
+        <!-- Luz ambiental suave y una luz direccional para marcar las facetas poligonales -->
+        <a-light type="ambient" color="#888"></a-light>
+        <a-light type="directional" color="#fff" intensity="0.8" position="-1 2 1"></a-light>
 
-    <!-- 4. Fondo de la escena -->
-    <a-sky color="#ECECF4"></a-sky>
+        <!-- SUELO -->
+        <a-plane position="0 0 0" rotation="-90 0 0" width="200" height="200" color="#4a3123" material="flatShading: true"></a-plane>
 
-    <!-- 5. Cámara con cursor para registrar el clic sobre objetos 3D -->
-    <a-camera>
-      <a-cursor color="#FF5722"></a-cursor>
-    </a-camera>
+        <!-- RECURSOS (PLANTILLAS PARA REUTILIZAR Y MANTENER EL CÓDIGO LIMPIO) -->
+        <a-assets>
+            <!-- Tronco facetado de 6 lados -->
+            <a-mixin id="tronco" geometry="primitive: cylinder; radius: 0.4; height: 2.5; segmentsRadial: 6" material="color: #6D4C41; flatShading: true"></a-mixin>
+            
+            <!-- Follaje facetado de 8 lados (conos) -->
+            <a-mixin id="hojas-base" geometry="primitive: cone; radiusBottom: 2.5; radiusTop: 0; height: 3.5; segmentsRadial: 8" material="color: #388E3C; flatShading: true"></a-mixin>
+            <a-mixin id="hojas-medio" geometry="primitive: cone; radiusBottom: 2; radiusTop: 0; height: 3; segmentsRadial: 8" material="color: #388E3C; flatShading: true"></a-mixin>
+            <a-mixin id="hojas-top" geometry="primitive: cone; radiusBottom: 1.5; radiusTop: 0; height: 2.5; segmentsRadial: 8" material="color: #388E3C; flatShading: true"></a-mixin>
+            
+            <!-- Montañas facetadas -->
+            <a-mixin id="montana" geometry="primitive: cone; radiusBottom: 40; height: 60; segmentsRadial: 5" material="color: #cfcfcf; flatShading: true"></a-mixin>
+        </a-assets>
 
-    <!-- 6. Modelo GLB configurado como enlace -->
-    <a-gltf-model
-      src="#modelo3d"
-      position="0 1.5 -3"
-      scale="1 1 1"
-      enlace-click="url: index.html">
-    </a-gltf-model>
+        <!-- MONTAÑAS AL FONDO -->
+        <a-entity mixin="montana" position="-20 0 -80" rotation="0 45 0" geometry="height: 70"></a-entity>
+        <a-entity mixin="montana" position="15 0 -90" rotation="0 15 0" geometry="radiusBottom: 50; height: 50" material="color: #b5b5b5"></a-entity>
+        <a-entity mixin="montana" position="-5 0 -100" rotation="0 70 0" geometry="height: 85"></a-entity>
 
-  </a-scene>
+        <!-- ÁRBOLES (Composición similar a la imagen) -->
+        
+        <!-- Árbol Izquierda Primer Plano -->
+        <a-entity position="-6 0 -10" scale="1.2 1.2 1.2">
+            <a-entity mixin="tronco" position="0 1.25 0"></a-entity>
+            <a-entity mixin="hojas-base" position="0 3.5 0"></a-entity>
+            <a-entity mixin="hojas-medio" position="0 5 0"></a-entity>
+            <a-entity mixin="hojas-top" position="0 6.5 0"></a-entity>
+        </a-entity>
 
+        <!-- Árbol Centro Primer Plano -->
+        <a-entity position="-2 0 -15">
+            <a-entity mixin="tronco" position="0 1.25 0"></a-entity>
+            <a-entity mixin="hojas-base" position="0 3.5 0"></a-entity>
+            <a-entity mixin="hojas-medio" position="0 5 0"></a-entity>
+            <a-entity mixin="hojas-top" position="0 6.5 0"></a-entity>
+        </a-entity>
+
+        <!-- Árbol Derecha Primer Plano -->
+        <a-entity position="5 0 -12" scale="1.1 1.1 1.1">
+            <a-entity mixin="tronco" position="0 1.25 0"></a-entity>
+            <a-entity mixin="hojas-base" position="0 3.5 0"></a-entity>
+            <a-entity mixin="hojas-medio" position="0 5 0"></a-entity>
+            <a-entity mixin="hojas-top" position="0 6.5 0"></a-entity>
+        </a-entity>
+
+        <!-- Árbol Fondo Centro -->
+        <a-entity position="0 0 -25" scale="0.9 0.9 0.9">
+            <a-entity mixin="tronco" position="0 1.25 0"></a-entity>
+            <a-entity mixin="hojas-base" position="0 3.5 0"></a-entity>
+            <a-entity mixin="hojas-medio" position="0 5 0"></a-entity>
+            <a-entity mixin="hojas-top" position="0 6.5 0"></a-entity>
+        </a-entity>
+
+        <!-- Árbol Fondo Derecha -->
+        <a-entity position="10 0 -30" scale="0.8 0.8 0.8">
+            <a-entity mixin="tronco" position="0 1.25 0"></a-entity>
+            <a-entity mixin="hojas-base" position="0 3.5 0"></a-entity>
+            <a-entity mixin="hojas-medio" position="0 5 0"></a-entity>
+            <a-entity mixin="hojas-top" position="0 6.5 0"></a-entity>
+        </a-entity>
+
+        <!-- Árbol Fondo Izquierda -->
+        <a-entity position="-12 0 -35" scale="0.85 0.85 0.85">
+            <a-entity mixin="tronco" position="0 1.25 0"></a-entity>
+            <a-entity mixin="hojas-base" position="0 3.5 0"></a-entity>
+            <a-entity mixin="hojas-medio" position="0 5 0"></a-entity>
+            <a-entity mixin="hojas-top" position="0 6.5 0"></a-entity>
+        </a-entity>
+
+        <!-- CÁMARA DEL JUGADOR (Con controles de movimiento) -->
+        <a-camera position="0 1.6 4"></a-camera>
+
+    </a-scene>
 </body>
 </html>
